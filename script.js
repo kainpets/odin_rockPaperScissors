@@ -8,8 +8,8 @@ function game() {
     } else if (resultOfTheGame === "You lose! Paper beats Rock") {
       computerScore += 1;
     } else if (resultOfTheGame === "Draw! You both chose Rock") {
-      computerScore += 1;
-      playerScore += 1;
+      computerScore += 0;
+      playerScore += 0;
     }
   }
   announceWinner(playerScore, computerScore)
