@@ -1,4 +1,5 @@
 const score = document.querySelector("#score");
+const announcement = document.querySelector("#announcement")
 let playerScore = 0;
 let computerScore = 0;
 
@@ -37,15 +38,11 @@ function disableButtons() {
 
 function announceWinner(playerScore, computerScore) {
   if (playerScore > computerScore) {
-    const announcement = document.createElement("h2");
     announcement.textContent = `You win the game! Your score was ${playerScore} and the computer's ${computerScore}`;
-    console.log(`You win the game! Your score was ${playerScore} and the computer's ${computerScore}`);
   } else if (playerScore === computerScore) {
-    announcement.textContent = `You draw the game! Both your scores were: ${playerScore}`;
-    console.log(`You draw the game! Both your scores were: ${playerScore}`);
+    announcement.textContent = `You draw the game! Both your scores were: ${playerScore}`; 
   } else {
-    announcement.textContent = `You lose the game! Your score was ${playerScore} and the computer's ${computerScore}`;
-    console.log(`You lose the game! Your score was ${playerScore} and the computer's ${computerScore}`)
+    announcement.textContent = `You lose the game! Your score was ${playerScore} and the computer's ${computerScore}`; 
   }
 }
 
