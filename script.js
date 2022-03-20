@@ -1,55 +1,55 @@
+const score = document.querySelector("#score");
+let playerScore = 0;
+let computerScore = 0;
+
 const rock = document.querySelector("#rock");
 rock.addEventListener("click", () => {
   let playerChoice = "rock";
-  console.log(playerChoice);
+  game(playerChoice);
 });
 
 const paper = document.querySelector("#paper");
 paper.addEventListener("click", () => {
   let playerChoice = "paper";
-  console.log(playerChoice);
+  game(playerChoice);
 });
 
 const scissors = document.querySelector("#scissors");
 scissors.addEventListener("click", () => {
   let playerChoice = "scissors";
-  console.log(playerChoice);
+  game(playerChoice);
 });
 
-
-const resultAnnouncment = document.querySelector("#winner");
-// resultAnnouncment.addEventListener()
-
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  
-  let resultOfTheGame = playRound(playerChoice, computerPlay());
-  
-  for (let i = 0; i < 5; i++) {
-    if (resultOfTheGame === "You win the round! Rock beats scissors") {
-      playerScore += 1;
-    } else if (resultOfTheGame === "You lose the round! Paper beats Rock") {
-      computerScore += 1;
-    } else if (resultOfTheGame === "This round's a draw! You both chose Rock") {
-      computerScore += 0;
-      playerScore += 0;
-    }
+function game(playerChoice) {
+  playRound(playerChoice, computerPlay());
+  if (playerScore === 5 || computerScore === 5) {
+    announceWinner(playerScore, computerScore);
+    disableButtons();
   }
-  announceWinner(playerScore, computerScore)
+}
+
+function disableButtons() {
+  const buttons = document.querySelectorAll(".buttons");
+  buttons.forEach(button => {
+    button.setAttribute("disabled", true);
+  });
 }
 
 function announceWinner(playerScore, computerScore) {
   if (playerScore > computerScore) {
+    const announcement = document.createElement("h2");
+    announcement.textContent = `You win the game! Your score was ${playerScore} and the computer's ${computerScore}`;
     console.log(`You win the game! Your score was ${playerScore} and the computer's ${computerScore}`);
   } else if (playerScore === computerScore) {
+    announcement.textContent = `You draw the game! Both your scores were: ${playerScore}`;
     console.log(`You draw the game! Both your scores were: ${playerScore}`);
   } else {
+    announcement.textContent = `You lose the game! Your score was ${playerScore} and the computer's ${computerScore}`;
     console.log(`You lose the game! Your score was ${playerScore} and the computer's ${computerScore}`)
   }
 }
 
-function playRound() {
+function playRound(playerChoice) {
   let player = playerChoice;
   let computer = computerPlay().toString().toLowerCase();
   let win = "You win! Rock beats scissors";
@@ -58,22 +58,20 @@ function playRound() {
   
   if (player === "rock" && computer === "paper" || player === "paper" && computer === "scissors" || player === "scissors" && computer === "rock") {
     console.log(lose)
+    score.textContent = `Your score: ${playerScore} Computer score ${computerScore += 1}`;
     return lose;
   } else if (player === "rock" && computer === "scissors" || player === "paper" && computer === "rock" || player === "scissors" && computer === "paper") {
     console.log(win)
+    score.textContent = `Your score: ${playerScore += 1} Computer score ${computerScore}`;
     return win;
   } else if (player === "rock" && computer === "rock" || player === "paper" && computer === "paper" || player === "scissors" && computer === "scissors") {
     console.log(draw);
+    score.textContent = `Your score: ${playerScore} Computer score ${computerScore}`;
     return draw;
   } else {
     console.log("Incorrect input")
   }
 }
-
-// function playerPlay() {
-//   //let playerChoice = window.prompt("Enter your choice: (rock, paper, scrissors)")
-//   //return playerChoice;
-// }
 
 function computerPlay() {
   let randomInt = getRandomInt();
@@ -89,6 +87,4 @@ function computerPlay() {
 function getRandomInt() {
   return Math.floor(Math.random() * 3);
 }
-
-game()
 
