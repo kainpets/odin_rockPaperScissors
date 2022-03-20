@@ -54,15 +54,15 @@ function playRound(playerChoice) {
   let draw = "Draw! You both chose Rock";
   
   if (player === "rock" && computer === "paper" || player === "paper" && computer === "scissors" || player === "scissors" && computer === "rock") {
-    console.log(lose)
+    announcement.textContent = lose;
     score.textContent = `Your score: ${playerScore} Computer score ${computerScore += 1}`;
     return lose;
   } else if (player === "rock" && computer === "scissors" || player === "paper" && computer === "rock" || player === "scissors" && computer === "paper") {
-    console.log(win)
+    announcement.textContent = win;
     score.textContent = `Your score: ${playerScore += 1} Computer score ${computerScore}`;
     return win;
   } else if (player === "rock" && computer === "rock" || player === "paper" && computer === "paper" || player === "scissors" && computer === "scissors") {
-    console.log(draw);
+    announcement.textContent = draw;
     score.textContent = `Your score: ${playerScore} Computer score ${computerScore}`;
     return draw;
   } else {
